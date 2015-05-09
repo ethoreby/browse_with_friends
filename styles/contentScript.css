@@ -11,6 +11,9 @@
   display: inline-block;
   position: relative;
 }
+.friendInnerContainer {
+  position: relative;
+}
 .eye,
 .iris,
 .pupil {

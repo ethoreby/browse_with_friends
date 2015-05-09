@@ -44,6 +44,7 @@ var activeFriends = {
     img: 'barak.png'
   }
 }
+var friendContainerHeight = 180;
 var friendContainerWidth = 300;
 
 var friendsContainerTemplate = '<div class="friendsContainer"></div>';
@@ -107,6 +108,14 @@ $(document).ready(function() {
     $.each(eyes, updateEye);
   };
 
+  var hideFriend = function(event) {
+    var container = $(event.currentTarget).find('.friendInnerContainer').animate({
+      top: '+=' + friendContainerHeight
+    }, 300);
+  }
+
   $(document).mousemove(followMouse);
+
+  $('.friendContainer').mouseover(hideFriend);
 
 });
