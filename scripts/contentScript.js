@@ -9,10 +9,32 @@ var activeFriends = {
     },
     height: 264,
     img: 'elliott.png'
+  },
+  sanic: {
+    eyes: {
+      color: '#ffffff',
+      l_x: 157,
+      l_y: 63,
+      r_x: 212,
+      r_y: 64
+    },
+    height: 220,
+    img: 'sanic.png'
+  },
+  nic: {
+    eyes: {
+      color: '#5cb8e6',
+      l_x: 157,
+      l_y: 63,
+      r_x: 212,
+      r_y: 64
+    },
+    height: 220,
+    img: 'nic.png'
   }
 }
 
-var imgSrc = chrome.extension.getURL('images/elliott.png');
+var friendsContainerTemplate = '<div class="friendsContainer"></div>';
 
 var getFriendTemplate = function(friend) {
   var imgSrc = chrome.extension.getURL('images/' + friend.img);
@@ -40,6 +62,10 @@ var getFriendTemplate = function(friend) {
 };
 
 $(document).ready(function() {
-  var newFriend = $(getFriendTemplate(activeFriends.elliott));
-  $('body').append(newFriend);
+  var friendsContainer = $(friendsContainerTemplate);
+  var newFriend = $(getFriendTemplate(activeFriends.sanic));
+  var newFriend2 = $(getFriendTemplate(activeFriends.elliott));
+  friendsContainer.prepend(newFriend);
+  friendsContainer.prepend(newFriend2);
+  $('body').append(friendsContainer);
 });
