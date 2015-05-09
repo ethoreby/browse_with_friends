@@ -24,12 +24,12 @@ var activeFriends = {
   nic: {
     eyes: {
       color: '#5cb8e6',
-      l_x: 157,
-      l_y: 63,
-      r_x: 212,
-      r_y: 64
+      l_x: 127,
+      l_y: 95,
+      r_x: 185,
+      r_y: 99
     },
-    height: 220,
+    height: 234,
     img: 'nic.png'
   }
 }
@@ -61,11 +61,16 @@ var getFriendTemplate = function(friend) {
   return template;
 };
 
+var friendsContainer = $(friendsContainerTemplate);
+var keys = Object.keys(activeFriends);
+for(var i = 0; i < keys.length; i++) {
+  var name = keys[i];
+  var friend = activeFriends[name];
+  var template = $(getFriendTemplate(friend));
+  friendsContainer.append(template);
+};
+
 $(document).ready(function() {
-  var friendsContainer = $(friendsContainerTemplate);
-  var newFriend = $(getFriendTemplate(activeFriends.sanic));
-  var newFriend2 = $(getFriendTemplate(activeFriends.elliott));
-  friendsContainer.prepend(newFriend);
-  friendsContainer.prepend(newFriend2);
+
   $('body').append(friendsContainer);
 });
