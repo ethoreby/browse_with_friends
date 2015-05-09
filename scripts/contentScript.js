@@ -82,7 +82,7 @@ $(document).ready(function() {
       var mouse_x = event.pageX;
       var mouse_y = event.pageY;
       var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
-      var degree = (radians * (180 / Math.PI) * -1) + 90 + 15;
+      var degree = (radians * (180 / Math.PI) * -1) + 225;
       eye.css('-moz-transform', 'rotate('+degree+'deg)');
       eye.css('-webkit-transform', 'rotate('+degree+'deg)');
       eye.css('-o-transform', 'rotate('+degree+'deg)');
