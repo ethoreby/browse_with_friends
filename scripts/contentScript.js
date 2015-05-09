@@ -55,17 +55,19 @@ var getFriendTemplate = function(friend) {
 
   var template =
   '<div class="friendContainer">' +
-    '<img src="' + imgSrc + '" style="height:' + friend.height + 'px;">' +
+    '<div class="friendInnerContainer">' +
+      '<img src="' + imgSrc + '" style="height:' + friend.height + 'px;">' +
 
-    '<div class="eye" style="'+ l_eyePos + '">' +
-      '<div class="iris" style="background-color:' + friend.eyes.color + ';">' +
-        '<div class="pupil"></div>' +
+      '<div class="eye" style="'+ l_eyePos + '">' +
+        '<div class="iris" style="background-color:' + friend.eyes.color + ';">' +
+          '<div class="pupil"></div>' +
+        '</div>' +
       '</div>' +
-    '</div>' +
 
-    '<div class="eye" style="' + r_eyePos + '">' +
-      '<div class="iris" style="background-color:' + friend.eyes.color + ';">' +
-        '<div class="pupil"></div>' +
+      '<div class="eye" style="' + r_eyePos + '">' +
+        '<div class="iris" style="background-color:' + friend.eyes.color + ';">' +
+          '<div class="pupil"></div>' +
+        '</div>' +
       '</div>' +
     '</div>' +
   '</div>'
@@ -86,24 +88,25 @@ $(document).ready(function() {
   $('body').append(friendsContainer);
 
   var eyes = $('.eye');
-  var followMouse = function(index, eye){
-      eye = $(eye);
-      var offset = eye.offset();
-      var center_x = (offset.left) + (eye.width()/2);
-      var center_y = (offset.top) + (eye.height()/2);
-      var mouse_x = event.pageX;
-      var mouse_y = event.pageY;
-      var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
-      var degree = (radians * (180 / Math.PI) * -1) + 225;
-      eye.css('-moz-transform', 'rotate('+degree+'deg)');
-      eye.css('-webkit-transform', 'rotate('+degree+'deg)');
-      eye.css('-o-transform', 'rotate('+degree+'deg)');
-      eye.css('-ms-transform', 'rotate('+degree+'deg)');
-    };
+  var mouse_x;
+  var mouse_y;
 
-    var updateEyes = function(event) {
-      $.each(eyes, followMouse);
-    };
+  var updateEye = function(index, eye) {
+    eye = $(eye);
+    var offset = eye.offset();
+    var center_x = (offset.left) + (eye.width()/2);
+    var center_y = (offset.top) + (eye.height()/2);
+    var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+    var degree = (radians * (180 / Math.PI) * -1) + 225;
+    eye.css('-webkit-transform', 'rotate(' + degree + 'deg)');
+  };
 
-    $(document).mousemove(updateEyes);
+  var followMouse = function(event) {
+    mouse_x = event.pageX;
+    mouse_y = event.pageY;
+    $.each(eyes, updateEye);
+  };
+
+  $(document).mousemove(followMouse);
+
 });
