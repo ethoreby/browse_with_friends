@@ -31,8 +31,20 @@ var activeFriends = {
     },
     height: 234,
     img: 'nic.png'
+  },
+  barak: {
+    eyes: {
+      color: '#8a2e00',
+      l_x: 105,
+      l_y: 112,
+      r_x: 167,
+      r_y: 110
+    },
+    height: 242,
+    img: 'barak.png'
   }
 }
+var friendContainerWidth = 300;
 
 var friendsContainerTemplate = '<div class="friendsContainer"></div>';
 
