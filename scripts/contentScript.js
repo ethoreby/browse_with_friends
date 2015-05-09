@@ -112,10 +112,16 @@ $(document).ready(function() {
     var container = $(event.currentTarget).find('.friendInnerContainer').animate({
       top: '+=' + friendContainerHeight
     }, 300);
-  }
+  };
+
+  var showFriend = function(event) {
+    var container = $(event.currentTarget).find('.friendInnerContainer').animate({
+      top: '-=' + friendContainerHeight
+    }, 1500);
+  };
 
   $(document).mousemove(followMouse);
 
-  $('.friendContainer').mouseover(hideFriend);
+  $('.friendContainer').hover(hideFriend, showFriend);
 
 });
