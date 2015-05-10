@@ -92,25 +92,12 @@ var friendsRoster = {
   activeFriends: {}
 };
 
-var initializeRoster = function(data) {
-  if(data.createdFriends) {
-    console.log(data.createdFriends);
-  }
-  var keys = Object.keys(friendsRoster);
-  for(var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    writeToStorage({ key: friendsRoster[key] });
-  };
-};
-
-chrome.storage.sync.get(['activeFriends', 'preCreatedFriends'], initializeRoster);
-
 var getCheckboxTemplate = function(name) {
   var friend = friendsRoster.preCreated[name];
   var template =
   '<div class="toggleFriendCheckbox">' +
     '<span class="friendThumbnailContainer"><img src="images/' + friend.img + '"></span>' +
-    '<input type="checkbox" value="'+ name + '">' +
+    '<input type="checkbox" value="'+ name + '"' + 'id="friendCheckbox_' + name  + '">' +
     '<span class="label">' + name + '</span>' +
   '</div>'
 
@@ -133,24 +120,39 @@ var toggleFriend = function(event) {
     console.log(context.val())
     friendsRoster.activeFriends[context.val()] = true;
   } else {
-    delete friendsRoster.activeFriends[context.value];
+    delete friendsRoster.activeFriends[context.val()];
   }
   writeToStorage({ activeFriends: friendsRoster.activeFriends });
 }
 
 var writeToStorage = function(item) {
-  chrome.storage.sync.set(item
-    // , function() {
-    // chrome.storage.sync.get(['activeFriends', 'preCreatedFriends']
-    // ,
-    // function(data) {
-    //   console.log(data);
-    // });
-  // }
-  );
+  chrome.storage.sync.set(item);
+}
+
+var initializeRoster = function(data) {
+
+  friendsRoster.activeFriends = data.activeFriends;
+  var keys = Object.keys(friendsRoster);
+  for(var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    writeToStorage({ key: friendsRoster[key] });
+  };
+
+  $('.toggleFriendCheckbox input').click(toggleFriend);
 };
 
 document.addEventListener('DOMContentLoaded', function() {
   buildCheckboxes();
-  $('.toggleFriendCheckbox input').click(toggleFriend);
+
+  var keys = Object.keys(friendsRoster.activeFriends);
+  for(var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+
+    console.log('#friendCheckbox_' + key);
+
+    $('#friendCheckbox_' + key).prop('checked', true);
+  }
+
+  chrome.storage.sync.get(['activeFriends', 'preCreatedFriends'], initializeRoster);
+
 });
