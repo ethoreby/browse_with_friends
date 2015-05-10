@@ -6,7 +6,7 @@
     <style>
       body {
         background-color: #ff6600;
-        width: 320px;
+        width: 370px;
         font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
       }
       h1 {
@@ -20,6 +20,7 @@
         height: 350px;
         overflow: scroll;
         padding: 5px;
+        width: 360px;
       }
       .toggleFriendCheckbox {
         display: flex;
@@ -42,14 +43,16 @@
       input[type="checkbox"] {
         margin-top: 7px;
       }
-      #friendControls button {
+      #friendControls button,
+      #renderBtn {
         width: 135px;
         margin: 6px 11px;
         padding: 5px 0;
         background-color: white;
         border-radius: 15px;
       }
-      #friendControls button:hover {
+      #friendControls button:hover,
+      #renderBtn:hover {
         cursor: pointer;
         background-color: #ffe0b2;
       }
@@ -60,6 +63,22 @@
       #friendCheckboxContent,
       #friendEditorContent {
         width: 320px;
+      }
+      #preview {
+        height: 300px;
+        width: 180px;
+        border: 1px solid red;
+      }
+      #inputs,
+      #preview {
+        float: right;
+      }
+      #inputs {
+        width: 160px;
+        padding: 5px;
+      }
+      #inputs input {
+        margin: 4px 0;
       }
     </style>
     <script src="lib/jquery-2.1.4.min.js"></script>
@@ -72,9 +91,24 @@
       <div style="display:none" id="friendEditorContent">
         <div id="friendEditorContainer">
           <h2>Make a Friend</h2>
+          <div id="inputs">
+            <input type="text" placeholder="name">
+            <input type="text" placeholder="image url">
+            <input type="text" placeholder="eye color hex">
+            <input type="number" placeholder="base height">
+            <div>
+              <span>left eye</span>
+              <input type="number" placeholder="top coordinate">
+              <input type="number" placeholder="left coordinate">
+            </div>
+            <div>
+              <span>right eye</span>
+              <input type="number" placeholder="top coordinate">
+              <input type="number" placeholder="left coordinate">
+            </div>
+            <button id="renderBtn">render</button>
+          </div>
           <div id="preview"></div>
-          <input type="text" placeholder="name">
-          <input type="text" placeholder="image url">
         </div>
         <div id="friendControls">
           <button id="backBtn">back</button>
