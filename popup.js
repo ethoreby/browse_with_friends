@@ -97,7 +97,7 @@ var getCheckboxTemplate = function(name) {
   var template =
   '<div class="toggleFriendCheckbox">' +
     '<span class="friendThumbnailContainer"><img src="images/' + friend.img + '"></span>' +
-    '<input type="checkbox" value="'+ name + '"' + 'id="friendCheckbox_' + name  + '">' +
+    '<input type="checkbox" value="'+ name + '"' + ' id="friendCheckbox_' + name  + '">' +
     '<span class="label">' + name + '</span>' +
   '</div>'
 
@@ -117,7 +117,6 @@ var buildCheckboxes = function() {
 var toggleFriend = function(event) {
   var context = $(this);
   if (context.is(':checked')) {
-    console.log(context.val())
     friendsRoster.activeFriends[context.val()] = true;
   } else {
     delete friendsRoster.activeFriends[context.val()];
@@ -138,21 +137,18 @@ var initializeRoster = function(data) {
     writeToStorage({ key: friendsRoster[key] });
   };
 
+  var keys = Object.keys(friendsRoster.activeFriends);
+  for(var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+
+    $('#friendCheckbox_' + key).prop('checked', true);
+  };
+
   $('.toggleFriendCheckbox input').click(toggleFriend);
 };
 
 document.addEventListener('DOMContentLoaded', function() {
   buildCheckboxes();
 
-  var keys = Object.keys(friendsRoster.activeFriends);
-  for(var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-
-    console.log('#friendCheckbox_' + key);
-
-    $('#friendCheckbox_' + key).prop('checked', true);
-  }
-
   chrome.storage.sync.get(['activeFriends', 'preCreatedFriends'], initializeRoster);
-
 });
