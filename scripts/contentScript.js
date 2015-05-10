@@ -108,20 +108,15 @@ $(document).ready(function() {
     $.each(eyes, updateEye);
   };
 
-  var hideFriend = function(event) {
+  var toggleVisibility = function(event, hiding, delay) {
+    var modifier = hiding ? '+=' : '-=';
     var container = $(event.currentTarget).find('.friendInnerContainer').animate({
-      top: '+=' + friendContainerHeight
-    }, 300);
+      top: modifier + friendContainerHeight
+    }, delay);
   };
-
-  var showFriend = function(event) {
-    var container = $(event.currentTarget).find('.friendInnerContainer').animate({
-      top: '-=' + friendContainerHeight
-    }, 1500);
-  };
+  var hideFriend = function(event) { toggleVisibility(event, true, 300); };
+  var showFriend = function(event) { toggleVisibility(event, false, 1500); };
 
   $(document).mousemove(followMouse);
-
   $('.friendContainer').hover(hideFriend, showFriend);
-
 });
