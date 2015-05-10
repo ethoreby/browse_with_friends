@@ -4,6 +4,7 @@
   margin-bottom: -4px;
   height: 180px;
   overflow: hidden;
+  pointer-events: none;
 }
 .friendsInverseContainer {
   -webkit-transform: rotate(180deg);
@@ -17,6 +18,7 @@
   text-align: center;
   display: inline-block;
   position: relative;
+  pointer-events: all;
 }
 .friendInnerContainer {
   position: relative;

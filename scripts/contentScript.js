@@ -167,6 +167,14 @@ $(document).ready(function() {
     var container = $(event.currentTarget).find('.friendInnerContainer').animate({
       top: modifier + friendContainerHeight
     }, delay);
+
+    // if(hiding) {
+    //   var outerContainer = $(event.currentTarget);
+    //   outerContainer.css('pointer-events', 'none');
+    //   setTimeout(function() {
+    //     $(event.currentTarget).css('pointer-events', 'all');
+    //   }, delay * 1.5);
+    // }
   };
   var hideFriend = function(event) { toggleVisibility(event, true, 300); };
   var showFriend = function(event) { toggleVisibility(event, false, 2000); };
