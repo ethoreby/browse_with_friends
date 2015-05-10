@@ -153,8 +153,15 @@ var initializeRoster = function(data) {
   $('.toggleFriendCheckbox input').click(toggleFriend);
 };
 
+var toggleFriendEditor = function(event) {
+  $('#friendEditorContent').toggle();
+  $('#friendCheckboxContent').toggle();
+};
+
 document.addEventListener('DOMContentLoaded', function() {
   buildCheckboxes();
   chrome.storage.sync.get(['activeFriends', 'preCreatedFriends'], initializeRoster);
   $('#disableFriendsBtn').click(disableFriends);
+  $('#makeNewFriendsBtn').click(toggleFriendEditor);
+  $('#backBtn').click(toggleFriendEditor);
 });

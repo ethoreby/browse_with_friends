@@ -6,16 +6,20 @@
     <style>
       body {
         background-color: #ff6600;
-        width: 240px;
+        width: 320px;
         font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
       }
       h1 {
         color: white;
         text-align: center;
       }
-      #friendCheckboxContainer {
+      #friendCheckboxContainer,
+      #friendEditorContainer {
         border: 1px solid black;
         background-color: white;
+        height: 350px;
+        overflow: scroll;
+        padding: 5px;
       }
       .toggleFriendCheckbox {
         display: flex;
@@ -39,8 +43,8 @@
         margin-top: 7px;
       }
       #friendControls button {
-        width: 110px;
-        margin: 6px 4px;
+        width: 135px;
+        margin: 6px 11px;
         padding: 5px 0;
         background-color: white;
         border-radius: 15px;
@@ -49,16 +53,43 @@
         cursor: pointer;
         background-color: #ffe0b2;
       }
+      #content {
+        width: 320px:
+        overflow: hidden;
+      }
+      #friendCheckboxContent,
+      #friendEditorContent {
+        width: 320px;
+      }
     </style>
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
     <h1>Browse with Friends!</h1>
-    <div id="friendCheckboxContainer"></div>
-    <div id="friendControls">
-      <button>make new friend</button>
-      <button id="disableFriendsBtn">disable friends</button>
+    <div id="content">
+
+      <div style="display:none" id="friendEditorContent">
+        <div id="friendEditorContainer">
+          <h2>Make a Friend</h2>
+          <div id="preview"></div>
+          <input type="text" placeholder="name">
+          <input type="text" placeholder="image url">
+        </div>
+        <div id="friendControls">
+          <button id="backBtn">back</button>
+          <button id="saveBtn">save</button>
+        </div>
+      </div>
+
+      <div id="friendCheckboxContent">
+        <div id="friendCheckboxContainer"></div>
+        <div id="friendControls">
+          <button id="makeNewFriendsBtn">make new friend</button>
+          <button id="disableFriendsBtn">disable friends</button>
+        </div>
+      </div>
+
     </div>
   </body>
 </html>
