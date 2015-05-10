@@ -6,10 +6,17 @@
     <link type="text/css" rel="stylesheet" charset="UTF-8" src="styles/popup.css">
     <style>
       body {
+        background-color: #ff6600;
         width: 200px;
+        font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+      }
+      h1 {
+        color: white;
+        text-align: center;
       }
       #friendCheckboxContainer {
         border: 1px solid black;
+        background-color: white;
       }
       .toggleFriendCheckbox {
         display: flex;
@@ -39,5 +46,9 @@
   <body>
     <h1>Browse with Friends!</h1>
     <div id="friendCheckboxContainer"></div>
+    <div id="friendControls">
+      <button>make new friend</button>
+      <button>disable friends</button>
+    </div>
   </body>
 </html>
