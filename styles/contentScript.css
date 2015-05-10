@@ -3,6 +3,11 @@
   position: fixed;
   margin-bottom: -4px;
 }
+.friendsInverseContainer {
+  -webkit-transform: rotate(180deg);
+  bottom: inherit;
+  top: -4px;
+}
 .friendContainer {
   height: 180px;
   width: 300px;

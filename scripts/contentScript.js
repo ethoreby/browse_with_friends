@@ -21,17 +21,17 @@ var activeFriends = {
     height: 220,
     img: 'sanic.png'
   },
-  nic: {
-    eyes: {
-      color: '#5cb8e6',
-      l_x: 127,
-      l_y: 95,
-      r_x: 185,
-      r_y: 99
-    },
-    height: 234,
-    img: 'nic.png'
-  },
+  // nic: {
+  //   eyes: {
+  //     color: '#5cb8e6',
+  //     l_x: 127,
+  //     l_y: 95,
+  //     r_x: 185,
+  //     r_y: 99
+  //   },
+  //   height: 234,
+  //   img: 'nic.png'
+  // },
   emma: {
     eyes: {
       color: '#531c00',
@@ -88,15 +88,20 @@ var getFriendTemplate = function(friend) {
 };
 
 var friendsContainer = $(friendsContainerTemplate);
+var friendsInverseContainer = $(friendsContainerTemplate);
+friendsInverseContainer.addClass('friendsInverseContainer');
 var keys = Object.keys(activeFriends);
 for(var i = 0; i < keys.length; i++) {
   var name = keys[i];
   var friend = activeFriends[name];
   var template = $(getFriendTemplate(friend));
+  var template2 = $(getFriendTemplate(friend));
   friendsContainer.append(template);
+  friendsInverseContainer.append(template2);
 };
 
 $(document).ready(function() {
+  $('body').append(friendsInverseContainer);
   $('body').append(friendsContainer);
 
   var eyes = $('.eye');
