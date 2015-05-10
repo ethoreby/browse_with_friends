@@ -128,6 +128,12 @@ var writeToStorage = function(item) {
   chrome.storage.sync.set(item);
 }
 
+var disableFriends = function(event) {
+  $('input[type="checkbox"]').prop('checked', false);
+  friendsRoster.activeFriends = {};
+  writeToStorage({ activeFriends: friendsRoster.activeFriends });
+}
+
 var initializeRoster = function(data) {
 
   friendsRoster.activeFriends = data.activeFriends;
@@ -149,6 +155,6 @@ var initializeRoster = function(data) {
 
 document.addEventListener('DOMContentLoaded', function() {
   buildCheckboxes();
-
   chrome.storage.sync.get(['activeFriends', 'preCreatedFriends'], initializeRoster);
+  $('#disableFriendsBtn').click(disableFriends);
 });
