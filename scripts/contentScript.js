@@ -21,17 +21,17 @@ var activeFriends = {
     height: 220,
     img: 'sanic.png'
   },
-  // nic: {
-  //   eyes: {
-  //     color: '#5cb8e6',
-  //     l_x: 127,
-  //     l_y: 95,
-  //     r_x: 185,
-  //     r_y: 99
-  //   },
-  //   height: 234,
-  //   img: 'nic.png'
-  // },
+  nic: {
+    eyes: {
+      color: '#5cb8e6',
+      l_x: 127,
+      l_y: 95,
+      r_x: 185,
+      r_y: 99
+    },
+    height: 234,
+    img: 'nic.png'
+  },
   emma: {
     eyes: {
       color: '#531c00',
@@ -53,6 +53,17 @@ var activeFriends = {
     },
     height: 242,
     img: 'barak.png'
+  },
+  george: {
+    eyes: {
+      color: '#5cb8e6',
+      l_x: 81,
+      l_y: 97,
+      r_x: 137,
+      r_y: 95
+    },
+    height: 351,
+    img: 'george.png'
   }
 }
 var friendContainerHeight = 180;
@@ -91,13 +102,18 @@ var friendsContainer = $(friendsContainerTemplate);
 var friendsInverseContainer = $(friendsContainerTemplate);
 friendsInverseContainer.addClass('friendsInverseContainer');
 var keys = Object.keys(activeFriends);
+var maxWidth = $(window).width();
 for(var i = 0; i < keys.length; i++) {
   var name = keys[i];
   var friend = activeFriends[name];
   var template = $(getFriendTemplate(friend));
   var template2 = $(getFriendTemplate(friend));
-  friendsContainer.append(template);
-  friendsInverseContainer.append(template2);
+  var workingWidth = (i + 1) * friendContainerWidth;
+  if(workingWidth < maxWidth) {
+    friendsContainer.append(template);
+  } else if (workingWidth < maxWidth * 2) {
+    friendsInverseContainer.append(template);
+  }
 };
 
 $(document).ready(function() {
