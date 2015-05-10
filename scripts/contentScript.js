@@ -87,7 +87,7 @@ var activeFriends = {
     height: 310,
     img: 'sterling.png'
   }
-}
+};
 var friendContainerHeight = 180;
 var friendContainerWidth = 300;
 

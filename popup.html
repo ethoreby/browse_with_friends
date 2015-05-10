@@ -4,11 +4,40 @@
   <head>
     <title>Browse with Friends!</title>
     <link type="text/css" rel="stylesheet" charset="UTF-8" src="styles/popup.css">
+    <style>
+      body {
+        width: 200px;
+      }
+      #friendCheckboxContainer {
+        border: 1px solid black;
+      }
+      .toggleFriendCheckbox {
+        display: flex;
+        height: 25px;
+        margin: 0 2px;
+        padding: 5px 0;
+      }
+      .friendThumbnailContainer {
+        height: 100%;
+        width: 25px;
+        overflow: hidden;
+        margin: 0 3px;
+      }
+      .toggleFriendCheckbox img {
+        height: 100%;
+      }
+      .toggleFriendCheckbox .label {
+        margin: 6px 0 0 7px;
+      }
+      input[type="checkbox"] {
+        margin-top: 7px;
+      }
+    </style>
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
     <h1>Browse with Friends!</h1>
-    <button id="addFriendBtn">add friend</button>
+    <div id="friendCheckboxContainer"></div>
   </body>
 </html>
