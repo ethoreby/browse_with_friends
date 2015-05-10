@@ -2,6 +2,8 @@
   bottom: 0;
   position: fixed;
   margin-bottom: -4px;
+  height: 180px;
+  overflow: hidden;
 }
 .friendsInverseContainer {
   -webkit-transform: rotate(180deg);
