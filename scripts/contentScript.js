@@ -147,7 +147,7 @@ $(document).ready(function() {
     }, delay);
   };
   var hideFriend = function(event) { toggleVisibility(event, true, 300); };
-  var showFriend = function(event) { toggleVisibility(event, false, 1500); };
+  var showFriend = function(event) { toggleVisibility(event, false, 2000); };
 
   $(document).mousemove(followMouse);
   $('.friendContainer').hover(hideFriend, showFriend);
