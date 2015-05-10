@@ -1,4 +1,4 @@
-var activeFriends = {
+var friendsRoster = {
   elliott: {
     eyes: {
       color: '#8a2e00',
@@ -123,62 +123,66 @@ var getFriendTemplate = function(friend) {
 var friendsContainer = $(friendsContainerTemplate);
 var friendsInverseContainer = $(friendsContainerTemplate);
 friendsInverseContainer.addClass('friendsInverseContainer');
-var keys = Object.keys(activeFriends);
-var maxWidth = $(window).width();
-for(var i = 0; i < keys.length; i++) {
-  var name = keys[i];
-  var friend = activeFriends[name];
-  var template = $(getFriendTemplate(friend));
-  var template2 = $(getFriendTemplate(friend));
-  var workingWidth = (i + 1) * friendContainerWidth;
-  if(workingWidth < maxWidth) {
-    friendsContainer.append(template);
-  } else if (workingWidth < maxWidth * 2) {
-    friendsInverseContainer.append(template);
-  }
-};
 
-$(document).ready(function() {
-  $('body').append(friendsInverseContainer);
-  $('body').append(friendsContainer);
-
-  var eyes = $('.eye');
-  var mouse_x;
-  var mouse_y;
-
-  var updateEye = function(index, eye) {
-    eye = $(eye);
-    var offset = eye.offset();
-    var center_x = (offset.left) + (eye.width()/2);
-    var center_y = (offset.top) + (eye.height()/2);
-    var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
-    var degree = (radians * (180 / Math.PI) * -1) + 225;
-    eye.css('-webkit-transform', 'rotate(' + degree + 'deg)');
-  };
-
-  var followMouse = function(event) {
-    mouse_x = event.pageX;
-    mouse_y = event.pageY;
-    $.each(eyes, updateEye);
-  };
-
-  var toggleVisibility = function(event, hiding, delay) {
-    var modifier = hiding ? '+=' : '-=';
-    var container = $(event.currentTarget).find('.friendInnerContainer').animate({
-      top: modifier + friendContainerHeight
-    }, delay);
-
-    if(hiding) {
-      var outerContainer = $(event.currentTarget);
-      outerContainer.css('pointer-events', 'none');
-      setTimeout(function() {
-        $(event.currentTarget).css('pointer-events', 'all');
-      }, 2800);
+chrome.storage.sync.get(['activeFriends', 'preCreatedFriends'], function(data) {
+  var activeFriends = data.activeFriends;
+  var keys = Object.keys(activeFriends);
+  var maxWidth = $(window).width();
+  for(var i = 0; i < keys.length; i++) {
+    var name = keys[i];
+    var friend = friendsRoster[name];
+    var template = $(getFriendTemplate(friend));
+    var template2 = $(getFriendTemplate(friend));
+    var workingWidth = (i + 1) * friendContainerWidth;
+    if(workingWidth < maxWidth) {
+      friendsContainer.append(template);
+    } else if (workingWidth < maxWidth * 2) {
+      friendsInverseContainer.append(template);
     }
   };
-  var hideFriend = function(event) { toggleVisibility(event, true, 300); };
-  var showFriend = function(event) { toggleVisibility(event, false, 2500); };
 
-  $(document).mousemove(followMouse);
-  $('.friendContainer').hover(hideFriend, showFriend);
+  $(document).ready(function() {
+    $('body').append(friendsInverseContainer);
+    $('body').append(friendsContainer);
+
+    var eyes = $('.eye');
+    var mouse_x;
+    var mouse_y;
+
+    var updateEye = function(index, eye) {
+      eye = $(eye);
+      var offset = eye.offset();
+      var center_x = (offset.left) + (eye.width()/2);
+      var center_y = (offset.top) + (eye.height()/2);
+      var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+      var degree = (radians * (180 / Math.PI) * -1) + 225;
+      eye.css('-webkit-transform', 'rotate(' + degree + 'deg)');
+    };
+
+    var followMouse = function(event) {
+      mouse_x = event.pageX;
+      mouse_y = event.pageY;
+      $.each(eyes, updateEye);
+    };
+
+    var toggleVisibility = function(event, hiding, delay) {
+      var modifier = hiding ? '+=' : '-=';
+      var container = $(event.currentTarget).find('.friendInnerContainer').animate({
+        top: modifier + friendContainerHeight
+      }, delay);
+
+      if(hiding) {
+        var outerContainer = $(event.currentTarget);
+        outerContainer.css('pointer-events', 'none');
+        setTimeout(function() {
+          $(event.currentTarget).css('pointer-events', 'all');
+        }, 2800);
+      }
+    };
+    var hideFriend = function(event) { toggleVisibility(event, true, 300); };
+    var showFriend = function(event) { toggleVisibility(event, false, 2500); };
+
+    $(document).mousemove(followMouse);
+    $('.friendContainer').hover(hideFriend, showFriend);
+  });
 });

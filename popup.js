@@ -146,7 +146,8 @@ var writeToStorage = function(item) {
     // function(data) {
     //   console.log(data);
     // });
-  });
+  // }
+  );
 };
 
 document.addEventListener('DOMContentLoaded', function() {
