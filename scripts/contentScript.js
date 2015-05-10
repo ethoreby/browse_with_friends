@@ -32,6 +32,17 @@ var activeFriends = {
     height: 234,
     img: 'nic.png'
   },
+  emma: {
+    eyes: {
+      color: '#531c00',
+      l_x: 117,
+      l_y: 110,
+      r_x: 174,
+      r_y: 112
+    },
+    height: 263,
+    img: 'emma.png'
+  },
   barak: {
     eyes: {
       color: '#8a2e00',
